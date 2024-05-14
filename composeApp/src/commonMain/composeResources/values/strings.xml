@@ -1,0 +1,6 @@
+<resources>
+    
+    <string name="app_name">SpaceX Launch</string>
+    <string name="error_text">Algo deu errado,\ndeslize a tela e tente novamente.</string>
+    
+</resources>

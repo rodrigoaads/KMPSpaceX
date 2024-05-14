@@ -1,24 +1,27 @@
 package com.rodrigoaads.kmpspacex
 
-import App
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.material.MaterialTheme
+import androidx.compose.ui.graphics.toArgb
+import presentation.pages.LaunchPage
+import theme.ProjectColors
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        this.setSystemColors()
         setContent {
-            App()
+            MaterialTheme {
+                LaunchPage()
+            }
         }
     }
 }
 
-@Preview
-@Composable
-fun AppAndroidPreview() {
-    App()
+fun ComponentActivity.setSystemColors() {
+    this.window.statusBarColor = ProjectColors.Blue.toArgb()
+    this.window.navigationBarColor = ProjectColors.LightGray.toArgb()
 }
