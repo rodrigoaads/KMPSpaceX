@@ -2,7 +2,7 @@ package presentation
 
 import androidx.compose.ui.Modifier
 
-fun Modifier.concateWithCondition(
+fun Modifier.concatenateWithCondition(
     condition: Boolean,
     modifier: Modifier
 ) = this.then(

@@ -16,7 +16,7 @@ import model.LaunchModel
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import presentation.atomic.atoms.error.ErrorTextAtom
 import presentation.atomic.organisms.LaunchOrganism
-import presentation.concateWithCondition
+import presentation.concatenateWithCondition
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -38,7 +38,7 @@ fun LaunchTemplate(
     Box(
         modifier = modifier
             .fillMaxSize()
-            .concateWithCondition(
+            .concatenateWithCondition(
                 condition = isLoading || showError,
                 modifier = Modifier
                     .pullRefresh(pullRefreshState)
