@@ -4,11 +4,13 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import data.repository.SpaceXRepository
+import data.repository.SpaceXRepositoryImpl
 import kmpspacex.composeapp.generated.resources.Res
 import kmpspacex.composeapp.generated.resources.app_name
-import model.LaunchModel
+import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.stringResource
 import presentation.atomic.molecules.topbar.TopBarMolecule
@@ -20,6 +22,36 @@ import theme.ProjectColors
 fun LaunchPage(
     modifier: Modifier = Modifier
 ) {
+
+    var uiModel by remember { mutableStateOf(UiModel()) }
+    val repository: SpaceXRepository = SpaceXRepositoryImpl()
+
+    val scope = rememberCoroutineScope()
+
+    val getData = {
+        scope.launch {
+            uiModel = uiModel.copy(
+                isLoading = true
+            )
+            try {
+                repository.getLaunches().run {
+                    uiModel = uiModel.copy(
+                        list = this,
+                        isLoading = false
+                    )
+                }
+            } catch (e: Exception) {
+                uiModel = uiModel.copy(
+                    error = true,
+                    isLoading = false
+                )
+            }
+        }
+    }
+
+    LaunchedEffect(Unit) {
+        getData.invoke()
+    }
 
     Scaffold(
         modifier = modifier
@@ -35,12 +67,14 @@ fun LaunchPage(
             modifier = Modifier
                 .padding(padding)
                 .background(ProjectColors.LightGray),
-            isLoading = false,
-            list = listOf(),
+            isLoading = uiModel.isLoading,
+            list = uiModel.list,
             onCLickLaunch = { id ->
 
             },
-            showError = false
-        )
+            showError = uiModel.error
+        ) {
+            getData.invoke()
+        }
     }
 }

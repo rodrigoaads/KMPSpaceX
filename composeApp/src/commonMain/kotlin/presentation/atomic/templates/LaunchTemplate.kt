@@ -25,14 +25,13 @@ fun LaunchTemplate(
     showError: Boolean,
     list: List<LaunchModel>,
     modifier: Modifier = Modifier,
-    onCLickLaunch: (Int) -> Unit
+    onCLickLaunch: (Int) -> Unit,
+    onRefresh: () -> Unit
 ) {
     
     val pullRefreshState = rememberPullRefreshState(
         refreshing = isLoading,
-        onRefresh = {
-            
-        }
+        onRefresh = onRefresh
     )
 
     Box(
@@ -42,7 +41,6 @@ fun LaunchTemplate(
                 condition = isLoading || showError,
                 modifier = Modifier
                     .pullRefresh(pullRefreshState)
-                    .verticalScroll(rememberScrollState())
             )
     ) {
         if (!showError) {
@@ -98,7 +96,8 @@ private fun Preview() {
                     description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
                 )
             ),
-            showError = false
+            showError = false,
+            onCLickLaunch = {}
         ) {}
     }
 }
