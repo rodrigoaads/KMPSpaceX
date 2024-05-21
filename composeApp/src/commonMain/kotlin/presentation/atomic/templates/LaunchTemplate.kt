@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import model.LaunchModel
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import presentation.atomic.atoms.error.ErrorTextAtom
+import presentation.atomic.molecules.error.ErrorMolecule
 import presentation.atomic.organisms.LaunchOrganism
 import presentation.concatenateWithCondition
 
@@ -49,10 +50,9 @@ fun LaunchTemplate(
                 onCLick = onCLickLaunch
             )
         } else {
-            ErrorTextAtom(
-                modifier = Modifier
-                    .align(Alignment.Center)
-            )
+            ErrorMolecule {
+                onRefresh.invoke()
+            }
         }
 
         PullRefreshIndicator(

@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.TextUnit
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import theme.ProjectDimens
@@ -23,7 +24,8 @@ fun ItemGenericTextAtom(
         text = text,
         color = color,
         fontSize = fontSize,
-        fontWeight = fontWeight
+        fontWeight = fontWeight,
+        overflow = TextOverflow.Ellipsis
     )
 }
 

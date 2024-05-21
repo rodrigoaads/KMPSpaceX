@@ -37,7 +37,8 @@ fun LaunchPage(
                 repository.getLaunches().run {
                     uiModel = uiModel.copy(
                         list = this,
-                        isLoading = false
+                        isLoading = false,
+                        error = false
                     )
                 }
             } catch (e: Exception) {

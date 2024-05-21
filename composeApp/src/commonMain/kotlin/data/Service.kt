@@ -16,7 +16,7 @@ class Service {
             url("https://api.spacexdata.com/v3/")
         }
         install(Logging) {
-            logger = Logger.DEFAULT
+            logger = Logger.SIMPLE
             level = LogLevel.ALL
         }
         install(ContentNegotiation) {
@@ -29,8 +29,6 @@ class Service {
     }
     
     suspend fun getLaunches(): List<LaunchResponse> {
-        return client.get {
-            url("launches")
-        }.body()
+        return client.get("launches").body()
     }
 }

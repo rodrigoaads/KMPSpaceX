@@ -26,7 +26,10 @@ fun ItemMolecule(
 ) {
     Card(
         modifier = modifier
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .heightIn(
+                max = 150.dp
+            ),
         backgroundColor = Color.White,
         shape = RoundedCornerShape(ProjectDimens.Shape.defaultCardShape),
         onClick = onCLick
